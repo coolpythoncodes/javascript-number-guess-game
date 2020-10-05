@@ -15,7 +15,9 @@ $(document).ready(function () {
 const success = () => {
   win += 1;
   let h3 = document.querySelector("h3");
-  h3.innerText = `Hurray!!! ${userInput.value} was the Correct guess. Number of wins ${win}`;
+  let h4 = document.querySelector("h4");
+  h3.innerText = `Hurray!!! ${userInput.value} was the Correct guess.`; 
+  h4.innerText= ` ${win}`;
 };
 
 const failed = () => {
