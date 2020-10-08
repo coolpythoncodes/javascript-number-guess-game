@@ -1,7 +1,6 @@
-// const userInput = document.querySelector('input[type="number"]');
 var userInput = document.getElementById('choice_box').innerText;
 const form = document.querySelector("form");
-// var randomNumber = 0;
+var randomNumber = 0;
 
 let win = 0;
 let loss = 0;
@@ -34,8 +33,9 @@ const success = () => {
   h4.innerText= ` ${win}`;
   // change the color of the choice box to green
   choicebox.style.backgroundColor = '#82e0aa';
+  choicebox.style.color = '#ffffff';
   // show the correct number and change the color of the answer box
-  answerbox.innerText = `${randomNumber()}`;
+  answerbox.innerText = `${randomNumber}`;
   answerbox.style.backgroundColor = '#82e0aa';
   answerbox.style.color = '#ffffff';
 };
@@ -48,25 +48,28 @@ const failed = () => {
   choicebox.style.backgroundColor = '#f5b7b1';
   choicebox.style.color = '#ffffff';
   // show the correct number and change the color of the answer box
-  answerbox.innerText = `${randomNumber()}`;
+  answerbox.innerText = `${randomNumber}`;
   answerbox.style.backgroundColor = '#82e0aa';
   answerbox.style.color = '#ffffff';
 };
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
+document.getElementById('submit').addEventListener("click", () => {
+  //e.preventDefault();
   userInput = document.getElementById('choice_box').innerText;
 
-  randomNumber = () => {
-    return Math.round(Math.random() * 10);
-  };
+  //var randomNumber = () => {
+  //   return Math.round(Math.random() * 10);
+  // };
+  // the above function will generate different randoms in each place it is called
+  // calling the function with ${randomNumber} will cast the function to a variable therefore printing the funtion as a string.
 
-  if (Number(userInput) === randomNumber()) {
+  // to fix this, we declare a global var randomNumber as seen at the top of the script, the we can alter the value from anywhere within the 
+  randomNumber = Math.round(Math.random() * 10);
+
+  if (Number(userInput) === randomNumber) {
     success();
-    //userInput = 0; this line is not doing anything
   }
   else {
     failed();
-    //userInput = 0; this line is not doing anything
   }
 });
