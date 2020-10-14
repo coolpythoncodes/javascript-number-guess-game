@@ -1,7 +1,7 @@
 body {
   font-family: 'PT Sans', sans-serif;
   font-size: 14px;
- background-color: #dff7f7;
+  background-color: #dff7f7;
 }
 
 div.page-container {
@@ -71,4 +71,23 @@ footer {
   text-align: center;
   flex-shrink: 0;
   padding: 4px;
+}
+
+@media screen and (max-width: 600px) {
+  div.page-container {
+    height: 100%;
+  }
+
+  h4 {
+    font-size: 28px;
+  }
+
+  #submit {
+    margin: 40px auto;
+    display: block;
+  }
+
+  footer {
+    margin-top: 40px;
+  }
 }
