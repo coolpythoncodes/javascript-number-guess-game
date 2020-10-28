@@ -42,8 +42,17 @@ span.answer-box {
   font-size: 10em;
 }
 
-h4 {
+table {
+  margin: 10px 0;
+  border: 1px solid black;
+}
+
+#wins {
   color: #008000;
+}
+
+#loses {
+  color: #f5b7b1;
 }
 
 input {

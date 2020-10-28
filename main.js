@@ -1,6 +1,10 @@
-var userInput = document.getElementById("choice_box").innerText;
+let userInput = document.getElementById("choice_box").innerText;
 const form = document.querySelector("form");
-var randomNumber = 0;
+let randomNumber = 0;
+let h3 = document.querySelector("h3");
+let h4 = document.querySelector("h4");
+let winScore = document.getElementById("wins");
+let loseScore = document.getElementById("loses");
 
 let win = 0;
 let loss = 0;
@@ -24,13 +28,12 @@ $(document).ready(function () {
     }
   }, 5100);
 });
-let h3 = document.querySelector("h3");
 
 const success = () => {
   win += 1;
-  let h4 = document.querySelector("h4");
   h3.innerText = `Hurray!!! ${userInput} was the Correct guess.`;
-  h4.innerText = ` ${win}`;
+  winScore.innerText = `${win}`;
+  // h4.innerText = ` ${win}`; replaced what you had with the above line
   // change the color of the choice box to green
   choicebox.style.backgroundColor = "#82e0aa";
   choicebox.style.color = "#ffffff";
@@ -43,7 +46,8 @@ const success = () => {
 const failed = () => {
   loss += 1;
   // let h3 = document.querySelector("h3");
-  h3.innerText = `Sorry, ${userInput} was not the correct guess. Number of loss ${loss}`;
+  h3.innerText = `Sorry, ${userInput} was not the correct guess. `; // Number of loses ${loss};
+  loseScore.innerText = `${loss}`;
   // change the color of the choice box to off red
   choicebox.style.backgroundColor = "#f5b7b1";
   choicebox.style.color = "#ffffff";
@@ -65,8 +69,8 @@ document.getElementById("submit").addEventListener("click", () => {
   }
 
   if (userInput > 10) {
-    h3.innerText = `You must enter a number between 1 and 10! ${userInput} is not valid. Try again!`;
-    h3.style.color = "#ff1a12";
+    h3.innerText = `You must enter a number between 1 and 10! ${userInput} is not valid, try again.`;
+    h3.style.color = "#f5b7b1";
     return;
   }
 
