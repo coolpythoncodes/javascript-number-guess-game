@@ -1,13 +1,18 @@
 let userInput = document.getElementById("choice_box").innerText;
 const form = document.querySelector("form");
-let randomNumber = 0;
-let h3 = document.querySelector("h3");
-let h4 = document.querySelector("h4");
-let winScore = document.getElementById("wins");
-let loseScore = document.getElementById("loses");
+var randomNumber = 0;
+const lowerNumberLimit = 1;
+const upperNumberLimit = 10;
+const successColor = '#82e0aa';
+const errorColor = '#f5b7b1';
 
 let win = 0;
 let loss = 0;
+
+// set number limit values to display on view
+document.getElementById('lowerNumberLimit').innerText = lowerNumberLimit;
+document.getElementById('upperNumberLimit').innerText = upperNumberLimit;
+document.getElementById('choice_box').innerText = lowerNumberLimit;
 
 // re-enforce box color
 choicebox = document.getElementById("choice_box");
@@ -31,48 +36,46 @@ $(document).ready(function () {
 
 const success = () => {
   win += 1;
+  
+  let h3 = document.querySelector("h3");
+  let h4 = document.querySelector("h4");
   h3.innerText = `Hurray!!! ${userInput} was the Correct guess.`;
-  winScore.innerText = `${win}`;
-  // h4.innerText = ` ${win}`; replaced what you had with the above line
+  h4.innerHTML = `<span style="color: ${successColor}">Wins: ${win}</span></br><span style="color: ${errorColor}">Losses: ${loss}</span>`;
   // change the color of the choice box to green
-  choicebox.style.backgroundColor = "#82e0aa";
-  choicebox.style.color = "#ffffff";
+  choicebox.style.backgroundColor = successColor;
+  choicebox.style.color = '#ffffff';
   // show the correct number and change the color of the answer box
   answerbox.innerText = `${randomNumber}`;
-  answerbox.style.backgroundColor = "#82e0aa";
-  answerbox.style.color = "#ffffff";
+  answerbox.style.backgroundColor = successColor;
+  answerbox.style.color = '#ffffff';
 };
 
 const failed = () => {
   loss += 1;
-  // let h3 = document.querySelector("h3");
-  h3.innerText = `Sorry, ${userInput} was not the correct guess. `; // Number of loses ${loss};
-  loseScore.innerText = `${loss}`;
+  let h3 = document.querySelector("h3");
+  let h4 = document.querySelector("h4");
+  h3.innerText = `Sorry, ${userInput} was not the correct guess.`;
+  h4.innerHTML = `<span style="color: ${successColor}">Wins: ${win}</span></br><span style="color: ${errorColor}">Losses: ${loss}</span>`;
   // change the color of the choice box to off red
-  choicebox.style.backgroundColor = "#f5b7b1";
-  choicebox.style.color = "#ffffff";
+  choicebox.style.backgroundColor = errorColor;
+  choicebox.style.color = '#ffffff';
   // show the correct number and change the color of the answer box
   answerbox.innerText = `${randomNumber}`;
-  answerbox.style.backgroundColor = "#82e0aa";
-  answerbox.style.color = "#ffffff";
+  answerbox.style.backgroundColor = errorColor;
+  answerbox.style.color = '#ffffff';
 };
 
-document.getElementById("submit").addEventListener("click", () => {
-  //e.preventDefault();
-  userInput = document.getElementById("choice_box").innerText;
-
-  const numbers = /^[0-9]*$/;
-  // checking if user input is a number or if they didn't enter anything
-  if (!numbers.test(userInput) || !userInput) {
-    // if it's not, we want to stop all processes
+document.getElementById('choice_box').addEventListener("input", (event) => {
+  const { innerText: value } = event.target;
+  const valInNumber = +value;
+  if (value === '' || (!isNaN(valInNumber) && value >= lowerNumberLimit && value < upperNumberLimit)) {
     return;
   }
+  event.target.innerText = 1;
+}, false);
 
-  if (userInput > 10) {
-    h3.innerText = `You must enter a number between 1 and 10! ${userInput} is not valid, try again.`;
-    h3.style.color = "#f5b7b1";
-    return;
-  }
+document.getElementById('submit').addEventListener("click", () => {
+  userInput = document.getElementById('choice_box').innerText;
 
   //var randomNumber = () => {
   //   return Math.round(Math.random() * 10);
@@ -80,8 +83,8 @@ document.getElementById("submit").addEventListener("click", () => {
   // the above function will generate different randoms in each place it is called
   // calling the function with ${randomNumber} will cast the function to a variable therefore printing the funtion as a string.
 
-  // to fix this, we declare a global var randomNumber as seen at the top of the script, the we can alter the value from anywhere within the
-  randomNumber = Math.round(Math.random() * 10);
+  // to fix this, we declare a global var randomNumber as seen at the top of the script, the we can alter the value from anywhere within the 
+  randomNumber = Math.floor(Math.random() * (upperNumberLimit - 1)) + lowerNumberLimit;
 
   if (Number(userInput) === randomNumber) {
     success();

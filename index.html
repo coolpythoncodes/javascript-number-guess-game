@@ -9,21 +9,11 @@
 </head>
 <body>
     <div class="page-container">
-        <h2>Guess a number between 1 and 10</h2>
+        <h2>Guess a number between <span id="lowerNumberLimit"></span> (inclusive) and <span id="upperNumberLimit"></span> (exclusive)</h2>
         <h3></h3>
         <h4></h4>
-        <table>
-            <tr>
-                <th>Wins</th>
-                <th>Loses</th>
-            </tr>
-            <tr>
-                <td id="wins">0</td>
-                <td id="loses">0</td>
-            </tr>
-        </table>
         <div>
-            <span contenteditable="true" class="choice-box" id="choice_box">0</span>
+            <span contenteditable="true" class="choice-box" id="choice_box"></span>
             <button class="submit" id="submit">Guess</button>
             <span class="answer-box" id="answer_box">?</span>
         </div>
